@@ -1,0 +1,26 @@
+[
+    {
+        "amount": "12.75",
+        "category": "Lunch",
+        "note": "Dos amigos",
+        "timestamp": "2025-05-22T14:12:10.037197"
+    },
+    {
+        "amount": 87.0,
+        "category": "Dinner",
+        "note": "got drunk",
+        "timestamp": "2025-05-22T16:18:22.917309"
+    },
+    {
+        "amount": 100.0,
+        "category": "Leisure",
+        "note": "Budz baby",
+        "timestamp": "2025-05-22T16:55:35.970516"
+    },
+    {
+        "amount": 29.38,
+        "category": "Lunch",
+        "note": "Ice Cream Sundae",
+        "timestamp": "2025-05-22T17:14:44.711559"
+    }
+]
