@@ -28,5 +28,11 @@
         "category": "Lunch",
         "note": "",
         "timestamp": "2025-05-22T20:04:05.488660"
+    },
+    {
+        "amount": 45.0,
+        "category": "Dinner",
+        "note": "N/A",
+        "timestamp": "2025-05-22T20:33:12.847815"
     }
 ]

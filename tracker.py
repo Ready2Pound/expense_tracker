@@ -181,13 +181,17 @@ def view_expenses_by_date_range():
 			print(f"{date} | {amount} | {category} | {note}")
 
 
-#----------------------------------------
+# ----------------------------------------
 # collect user input and write to file
-#----------------------------------------
+# ----------------------------------------
 def add_expense_flow():
 	amount_input = input("Enter the amount spent: ")
 	category_input = input("Enter the category (e.g., food, transport, etc.): ")
 	note_input = input("Enter a note. (Optional): ")
+
+	# set default note value if none added
+	if not note_input.strip():
+		note_input = "N/A"
 
 	# try to convert amount to float
 	try:
