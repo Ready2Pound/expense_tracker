@@ -22,5 +22,11 @@
         "category": "Lunch",
         "note": "Ice Cream Sundae",
         "timestamp": "2025-05-22T17:14:44.711559"
+    },
+    {
+        "amount": 5.0,
+        "category": "",
+        "note": "N/A",
+        "timestamp": "2025-05-24T13:07:48.668102"
     }
 ]
