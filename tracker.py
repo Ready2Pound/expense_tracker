@@ -5,6 +5,7 @@ import os
 
 # -----------------------------------------------------------
 # NOTES
+# YOOOOOOOOO
 # ask user for amount
 # ask user for category
 # ask for note. optional 
