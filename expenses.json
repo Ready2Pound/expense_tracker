@@ -34,5 +34,11 @@
         "category": "Dinner",
         "note": "N/A",
         "timestamp": "2025-05-22T20:33:12.847815"
+    },
+    {
+        "amount": 39.0,
+        "category": "Lunch",
+        "note": "ShakeShack",
+        "timestamp": "2025-05-23T22:38:26.816581"
     }
 ]
