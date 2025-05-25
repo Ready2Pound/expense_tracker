@@ -238,22 +238,34 @@ def delete_expenses():
 
 	# prompt user to select a choice
 	while True:
-		try:
-			choice = int(input("\nPlease enter number to delete, type 'all' to delete all entries, or '0' return to the menu. "))
-			if choice == 0:
-				print("\nYou are getting somewhere")
-				return		#valid choice, exit loop
-			elif choice == 'all':
-				confirm = input("Are you sure you want to delete ALL expenses? Type 'yes' to confirm. ").lower
-				if confirm == "yes":
-					save_expenses([])
-					print("All expenses deleted. ")
-			elif choice < 1 or choice > len(expenses):
-				print("Invalid choice. Please choose an option from the list.")
+		choice = input("\nPlease enter number to delete, type 'all' to delete all entries, or '0' return to the menu. ")
+		
+		if choice == 0:
+			print("\nYou are getting somewhere")
+			return		#valid choice, exit loop
+
+		elif choice == 'all':
+			confirm = input("Are you sure you want to delete ALL expenses? Type 'yes' to confirm. ").lower()
+			if confirm in ("yes", "y"):
+				save_expenses([])
+				print("All expenses deleted. ")
 			else:
-				break 		#valid choice, exit loop
-		except ValueError: 		#this line catches cases like pressing Enter or entering a non integer value
-				print("\nInvalid input. Please enter a number from the choices above.")
+				print("Canceled. ")
+			return		# exit after handling 'all'		
+
+		else:
+			# try converting to int for numbered option
+			try:
+				choice = int(choice)
+				if 1 <= choice <= len(expenses):
+					break		
+				elif choice == 0:
+					print("\nYou are getting somewhere")
+					return		#valid choice, exit loop
+				else:
+					print("Invalid choice. Please choose an option from the list.")
+			except ValueError:
+				print("Invalid input. Please enter a number, 'all', or '0'. ")
 	
 	# display choice selection
 	delete_choice = expenses[choice - 1]
@@ -271,8 +283,6 @@ def delete_expenses():
 		print("Expense deleted successfully")
 	else:
 		print("\nDeletion cancelled.")
-
-	# delete the expense
 	 
 
 # ----------------------------------------

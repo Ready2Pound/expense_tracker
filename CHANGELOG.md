@@ -1,9 +1,23 @@
 # Changelog
 
+## [Version 2.0.2] - 2025-05-24
+
+### Added
+- View totals by category correctly adding categories (test)
+
+### Fixed
+- Delete all feature 
+
+#### Changed
+- Added ease for menu navigation
+
+#### Working on currently
+- 
+
 ## [Version 2.0.1] - 2025-05-24
 
 ### Added
-- Added delete all feature (bugged)
+- Added delete all feature 
 - View totals by category correctly adding categories (test)
 
 ### Fixed
