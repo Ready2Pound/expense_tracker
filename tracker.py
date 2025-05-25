@@ -201,6 +201,7 @@ def view_expenses_by_date_range():
 			category = expense["category"].ljust(12)
 			note = expense.get("note", "")
 			print(f"{date} | {amount} | {category} | {note}")
+			# No 3 decimal places would be saved
 
 # -------------------------
 # delete expenses
