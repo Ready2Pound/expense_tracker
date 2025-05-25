@@ -117,6 +117,8 @@ def main():
 # views totals by category	
 # -------------------------
 
+#g- add a sum of all your expenses
+
 def view_totals_by_category():
 	if not os.path.exists("expenses.json"):
 		print("No expenses found.")

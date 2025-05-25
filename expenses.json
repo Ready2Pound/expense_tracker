@@ -28,5 +28,17 @@
         "category": "",
         "note": "N/A",
         "timestamp": "2025-05-24T13:07:48.668102"
+    },
+    {
+        "amount": 130.0,
+        "category": "phone",
+        "note": "verizon",
+        "timestamp": "2025-05-24T15:21:21.526040"
+    },
+    {
+        "amount": 100.0,
+        "category": "phone",
+        "note": "tmobile",
+        "timestamp": "2025-05-24T15:33:37.094617"
     }
 ]
