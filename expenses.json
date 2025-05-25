@@ -1,1 +1,20 @@
-[]
+[
+    {
+        "amount": 21.0,
+        "category": "budz",
+        "note": "friends",
+        "timestamp": "2025-05-24T22:53:49.788273"
+    },
+    {
+        "amount": 45.0,
+        "category": "dinner",
+        "note": "steak",
+        "timestamp": "2025-05-24T22:54:11.328838"
+    },
+    {
+        "amount": 17.0,
+        "category": "dinner",
+        "note": "sandwich",
+        "timestamp": "2025-05-24T22:54:22.189715"
+    }
+]

@@ -4,15 +4,18 @@
 
 ### Added
 - View totals by category correctly adding categories (test)
+- Total expenses 
 
 ### Fixed
 - Delete all feature 
+- Refactored view_expenses function and output formatting
+- 
 
 #### Changed
 - Added ease for menu navigation
 
 #### Working on currently
-- 
+- refactoring view_all_expenses function
 
 ## [Version 2.0.1] - 2025-05-24
 

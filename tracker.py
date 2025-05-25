@@ -46,7 +46,7 @@ def save_expenses(expenses_list):
 
 
 # ----------------------------------------------
-# view each expense
+# view all expenses
 # ----------------------------------------------
 
 def view_all_expenses():
@@ -66,23 +66,30 @@ def view_all_expenses():
 		return
 
 	print("\n--- All Expenses ---")
-	for expense in expenses:
+
+	# print headers for columns
+	print(f"{'No.':2} | {'Amount':6} | {'Category':8} | {'Date':4} | {'Note'}")
+	print("-" * 50)
+
+	total_amount = 0
+
+	for idx, expense in enumerate(expenses, start=1):
 		timestamp = expense.get("timestamp", "")
+		date_only = timestamp[:10]
 		amount_value = expense.get("amount", 0)
 		try:
     			amount = float(amount_value)
 		except (TypeError, ValueError):
     			amount = 0.0
+		
+		total_amount += amount		
 
 		category = expense.get("category", "N/A")
 		note = expense.get("note", "")
-
-	for idx, expense in enumerate(expenses, start=1):
 		amount_str = expense['amount']
 		amount_num = float(amount_str)
-		print(f"{idx}. ${amount_num:.2f} - {expense['category'].capitalize()} on {expense['timestamp']} Note: {expense['note']}")
-
-		#print(f"{timestamp[:10]} | {(' $' + f'{amount:.2f}'):>8} | {category.ljust(12).capitalize()} | {note}")
+		print(f"{idx:3d}. ${amount_num:.2f} - {expense['category'].capitalize()} on {date_only} Note: {expense['note']}")
+	print(f"\n{'Your total expenses are'} ${total_amount}")
 
 # ----------------------
 # main loop 
