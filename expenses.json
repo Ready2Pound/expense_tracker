@@ -16,5 +16,11 @@
         "category": "dinner",
         "note": "sandwich",
         "timestamp": "2025-05-24T22:54:22.189715"
+    },
+    {
+        "amount": 18.01,
+        "category": "lunch",
+        "note": "Test",
+        "timestamp": "2025-05-26T18:04:46.231049"
     }
 ]
