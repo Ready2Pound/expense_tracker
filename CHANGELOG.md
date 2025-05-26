@@ -1,6 +1,6 @@
 # Changelog
 
-## [Version 2.0.2] - 2025-05-24
+## [Version 2.0.3] - 2025-05-24
 
 ### Added
 - View totals by category correctly adding categories (test)
