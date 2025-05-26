@@ -16,10 +16,6 @@ import os
 # saves added expenses to file
 # -------------------------------------------
 def save_expense(new_entry):
-	# Normalize category if exists
-	if 'category' in new_entry:
-		new_entry['category'] = new_entry['category'].strip().lower()
-
 	# load existing expenses
 	if os.path.exists("expenses.json"):
 		with open("expenses.json", "r") as file:
@@ -46,7 +42,7 @@ def save_expenses(expenses_list):
 
 
 # ----------------------------------------------
-# view all expenses
+# gathers, formats, and displays each expense
 # ----------------------------------------------
 
 def view_all_expenses():
@@ -66,30 +62,23 @@ def view_all_expenses():
 		return
 
 	print("\n--- All Expenses ---")
-
-	# print headers for columns
-	print(f"{'No.':2} | {'Amount':6} | {'Category':8} | {'Date':4} | {'Note'}")
-	print("-" * 50)
-
-	total_amount = 0
-
-	for idx, expense in enumerate(expenses, start=1):
+	for expense in expenses:
 		timestamp = expense.get("timestamp", "")
-		date_only = timestamp[:10]
 		amount_value = expense.get("amount", 0)
 		try:
     			amount = float(amount_value)
 		except (TypeError, ValueError):
     			amount = 0.0
-		
-		total_amount += amount		
 
 		category = expense.get("category", "N/A")
 		note = expense.get("note", "")
+
+	for idx, expense in enumerate(expenses, start=1):
 		amount_str = expense['amount']
 		amount_num = float(amount_str)
-		print(f"{idx:3d}. ${amount_num:.2f} - {expense['category'].capitalize()} on {date_only} Note: {expense['note']}")
-	print(f"\n{'Your total expenses are'} ${total_amount}")
+		print(f"{idx}. ${amount_num:.2f} - {expense['category'].capitalize()} on {expense['timestamp']} Note: {expense['note']}")
+
+		#print(f"{timestamp[:10]} | {(' $' + f'{amount:.2f}'):>8} | {category.ljust(12).capitalize()} | {note}")
 
 # ----------------------
 # main loop 
@@ -121,11 +110,14 @@ def main():
 			print("Goodbye.")
 			exit()
 		else:
-			print("\nInvalid choice. Please choose a number from the menu.")
+			print("Invalid choice. Please choose a number from the menu.")
+			return()
 
 # -------------------------
 # views totals by category	
 # -------------------------
+
+#g- add a sum of all your expenses
 
 def view_totals_by_category():
 	if not os.path.exists("expenses.json"):
@@ -154,26 +146,20 @@ def view_totals_by_category():
 
 	print("\n--- Totals by Category ---")
 	for category, total in category_totals.items():
-		print(f"{category.ljust(15).capitalize()} : ${total:.2f}")
+		print(f"{category.ljust(15)} : ${total:.2f}")
 
 # ---------------------------------
 # filter by date range
 # ---------------------------------
 def view_expenses_by_date_range():
-	start_input = input("Enter a start date (YYYY-MM-DD) or press Enter to cancel. ")
-	if not start_input.strip():
-		print("No start date entered. Returning to menu. ")
-		return
-
-	end_input = input("Enter an end date (YYYY-MM-DD) or press Enter to cancel. ")
-	if not end_input.strip():
-		print("No end date selected. Returning to menu. ")
+	start_input = input("Enter a start date (YYYY-MM-DD): ")
+	end_input = input("Enter an end date (YYYY-MM-DD): ")
 
 	try:
 		start_date = datetime.datetime.strptime(start_input, "%Y-%m-%d").date()
 		end_date = datetime.datetime.strptime(end_input, "%Y-%m-%d").date()
-	except ValueError:
-		print("\nInvalid date format.")
+	except json.JSONDecodeError:
+		print("Invalid date format.")
 		return
 
 	if not os.path.exists("expenses.json"):
@@ -215,6 +201,7 @@ def view_expenses_by_date_range():
 			category = expense["category"].ljust(12)
 			note = expense.get("note", "")
 			print(f"{date} | {amount} | {category} | {note}")
+			# No 3 decimal places would be saved
 
 # -------------------------
 # delete expenses
@@ -237,7 +224,6 @@ def delete_expenses():
 
 	# display all expenses in numbered list
 	print("\nExpenses:")
-	
 	for idx, expense in enumerate(expenses, start=1):
 		amount_str = expense['amount']
 		amount_num = float(amount_str)
@@ -245,34 +231,19 @@ def delete_expenses():
 
 	# prompt user to select a choice
 	while True:
-		choice = input("\nPlease enter number to delete, type 'all' to delete all entries, or '0' return to the menu. ")
-		
-		if choice == 0:
-			print("\nYou are getting somewhere")
-			return		#valid choice, exit loop
-
-		elif choice == 'all':
-			confirm = input("Are you sure you want to delete ALL expenses? Type 'yes' to confirm. ").lower()
-			if confirm in ("yes", "y"):
-				save_expenses([])
-				print("All expenses deleted. ")
-			else:
-				print("Canceled. ")
-			return		# exit after handling 'all'		
-
-		else:
-			# try converting to int for numbered option
-			try:
-				choice = int(choice)
-				if 1 <= choice <= len(expenses):
-					break		
-				elif choice == 0:
-					print("\nYou are getting somewhere")
-					return		#valid choice, exit loop
-				else:
-					print("Invalid choice. Please choose an option from the list.")
-			except ValueError:
-				print("Invalid input. Please enter a number, 'all', or '0'. ")
+		#try:
+            choice = int(input("\nPlease choose an expense to delete from the numbered options above or press 0 to quit: "))
+            if choice == 0:
+                print("Delete cancelled. Returning to main menu...")
+                return
+                
+            if choice > len(expenses):
+                print("Invalid choice. Please choose an option from the list.")
+                continue
+            else:
+				#break 		#valid choice, exit loop
+		#except ValueError: 		#this line catches cases like pressing Enter or entering a non integer value
+                print("Invalid input. Please enter a number from the choices above.")
 	
 	# display choice selection
 	delete_choice = expenses[choice - 1]
@@ -287,27 +258,20 @@ def delete_expenses():
 	if confirm in ("yes", "y"):
 		expenses.pop(choice - 1)
 		save_expenses(expenses)
+		print()
 		print("Expense deleted successfully")
 	else:
 		print("\nDeletion cancelled.")
+
+	# delete the expense
+	# Cancel delete option without having to actually select one
 	 
 
 # ----------------------------------------
-# add new expense and write to file
+# collect user input and write to file
 # ----------------------------------------
 def add_expense_flow():
-	# loop to ensure valid amount entry
-	while True: 
-		amount_input = input("Enter the amount spent: ")
-		if not amount_input.strip():
-			print("No amount enterred. Cancelling.")
-			return
-		try:
-			amount = float(amount_input)
-			break 	# valid amount entered; exit loop
-		except ValueError:
-			print("Invalid amount. Please enter a number.")
-
+	amount_input = input("Enter the amount spent: ")
 	category_input = input("Enter the category (e.g., food, transport, etc.): ")
 	note_input = input("Enter a note. (Optional): ")
 
@@ -322,7 +286,7 @@ def add_expense_flow():
 	try:
 		amount = float(amount_input)
 	except ValueError:
-		print("\nInvalid amount. Please enter a number.")
+		print("Invalid amount. Please enter a number.")
 		exit()
 
 	# create the dictionary entry
@@ -334,6 +298,7 @@ def add_expense_flow():
 	}
 
 	save_expense(new_expense)
+	print() 
 	print("Expense saved successfully")
 
 if __name__ == "__main__":
