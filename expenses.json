@@ -40,5 +40,23 @@
         "category": "phone",
         "note": "tmobile",
         "timestamp": "2025-05-24T15:33:37.094617"
+    },
+    {
+        "amount": 100.1234,
+        "category": "phone",
+        "note": "verizon",
+        "timestamp": "2025-05-25T22:43:06.056410"
+    },
+    {
+        "amount": 100.2345,
+        "category": "phone",
+        "note": "verizon",
+        "timestamp": "2025-05-25T22:46:12.402935"
+    },
+    {
+        "amount": 100.0,
+        "category": "phone",
+        "note": "ver",
+        "timestamp": "2025-05-25T22:47:35.036534"
     }
 ]

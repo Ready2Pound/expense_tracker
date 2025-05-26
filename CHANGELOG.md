@@ -1,17 +1,25 @@
 # Changelog
 
-## [Version 2.0.2] - 2025-05-24
+## [Version 2.0.3] - 2025-05-24
 
 ### Added
+-
+-
 
 ### Fixed 
 - gil (when typing all to delete all, code would send you back to main menu if you pressed any key other than 'yes or y')
 - gil
+
 #### Changed
 - Added ease for menu navigation
+-
 
 #### Working on currently
-- refactoring view_all_expenses function
+- 
+-
+
+#### Questions
+- Where is delete all option?
 
 ## [Version 2.0.1] - 2025-05-24
 
