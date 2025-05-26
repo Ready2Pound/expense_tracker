@@ -29,8 +29,12 @@ def save_expenses(expenses):
 # ---------------------------------------
 
 st.title("Smart Expense Tracker")
-menu = st.sidebar.radio("Navigate", ["Add Expense", "View All Expenses"]) 
+menu = st.sidebar.radio("Navigate", ["Add Expense", "View All Expenses", "Totals by Category"]) 
 st.write("Welcome to your upgraded tracker!")
+
+# ----------------
+# Add expense function
+# ----------------
 
 if menu == "Add Expense":
 	st.header("Add an expense")
@@ -53,3 +57,34 @@ if menu == "Add Expense":
 		save_expenses(expenses)
 	
 		st.success("Expense saved successfully!")
+
+# -----------------------
+# View expenses function
+# -----------------------
+
+if menu == "View All Expenses":
+    st.header("All Expenses")
+
+    expenses = load_expenses()
+
+    if not expenses:
+        st.info("No expenses found.")
+    else:
+        for idx, e in enumerate(expenses, start=1):
+            st.markdown(f"""
+                **{idx}. ${float(e['amount']):.2f} - {e['category'].capitalize()}**
+                - {e['timestamp'][:10]}
+                - {e['note']}
+                ---
+            """)
+
+# ----------------------------
+# Totals by category function
+# ----------------------------
+
+if menu == "Totals by Category":
+    st.header = ("Totals by category")
+
+    if os.path.exists("expenses.json"):
+        with open("expenses.json" "r") as f
+    expenses = load.json("expenses.json" , "r")
